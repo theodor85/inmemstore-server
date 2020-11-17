@@ -15,7 +15,7 @@ cd inmemstore-server
 
 ```
 python3 -m venv env
-source ./env/bin/actuvate
+source ./env/bin/activate
 ```
 
 Установить зависимости:
