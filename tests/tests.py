@@ -8,9 +8,12 @@ class TestStore:
             'key': 'value',
         }
         URL = 'http://0.0.0.0:8080/keys'
-        requests.post(URL, json=body)
+        response = requests.post(URL, json=body)
+
+        assert response.status_code == 201  # created
 
         response = requests.get(URL)
+        assert response.status_code == 200  # OK
         assert response.json()['key'] == 'value'
 
     def test_delete_all_items(self):

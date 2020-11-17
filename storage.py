@@ -1,11 +1,12 @@
 
 
-class Store:
+class Storage:
 
     _STORE = dict()
 
     def bulk_update(self, input_dict: dict):
         self._STORE.update(input_dict)
+        return 201  # created
 
     def list(self):
         return self._STORE
@@ -20,3 +21,4 @@ class Store:
 
     def clear(self):
         self._STORE.clear()
+        return 204  # No Content (success)
