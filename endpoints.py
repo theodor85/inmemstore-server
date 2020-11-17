@@ -13,6 +13,16 @@ async def keys_list(request):
     return web.json_response(Storage().list())
 
 
+@routes.get('/key')
+async def one_item(request):
+    ''' Getting chosen values
+    '''
+    body = await request.json()
+    key = body[0]
+    value, status_code = Storage().get_value(key)
+    return web.Response(status=status_code, text=value)
+
+
 @routes.post('/keys')
 async def keys_create(request):
     ''' Create new key-value pair(s)

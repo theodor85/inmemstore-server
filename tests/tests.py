@@ -3,7 +3,7 @@ import requests
 
 class TestStore:
 
-    def test_create_one_item(self):
+    def test_create_update_one_item(self):
         body = {
             'key': 'value',
         }
@@ -15,6 +15,25 @@ class TestStore:
         response = requests.get(URL)
         assert response.status_code == 200  # OK
         assert response.json()['key'] == 'value'
+
+    def test_get_one_item(self):
+        # create items
+        body = {
+            'key123': 'value123',
+            'keyqwe': 'valueqwe',
+        }
+        URL = 'http://0.0.0.0:8080/keys'
+        response = requests.post(URL, json=body)
+        assert response.status_code == 201  # created
+
+        body = [
+            'key123',
+        ]
+        URL = 'http://0.0.0.0:8080/key'
+        response = requests.get(URL, json=body)
+
+        assert response.status_code == 200  # OK
+        assert response.text == 'value123'
 
     def test_delete_all_items(self):
         # create few items

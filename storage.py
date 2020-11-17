@@ -12,6 +12,17 @@ class Storage:
     def list(self):
         return self._STORE
 
+    def get_value(self, key):
+        status_code = 200
+        try:
+            value = self._STORE[key]
+        except KeyError:
+            status_code = 404  # not found
+            value = None
+        else:
+            status_code = 200  # OK
+        return value, status_code
+
     def delete(self, keys: Union[Any, MutableSequence]) -> Union[list, int]:
         status_code = 204
         if isinstance(keys, MutableSequence):
