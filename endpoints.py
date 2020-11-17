@@ -20,6 +20,14 @@ async def keys_create(request):
     return web.Response(status=Storage().bulk_update(await request.json()))
 
 
+@routes.delete('/keys')
+async def keys_delete(request):
+    ''' Delete chosen values
+    '''
+    result, status_code = Storage().delete(await request.json())
+    return web.json_response(result, status=status_code)
+
+
 @routes.post('/keys/clear')
 async def clear_all(request):
     ''' Delete all items

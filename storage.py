@@ -1,3 +1,4 @@
+from typing import Union, Any, MutableSequence
 
 
 class Storage:
@@ -11,13 +12,26 @@ class Storage:
     def list(self):
         return self._STORE
 
-    def delete(self, key) -> int:
-        try:
-            del self._STORE[key]
-        except KeyError:
-            return 404  # not found
+    def delete(self, keys: Union[Any, MutableSequence]) -> Union[list, int]:
+        status_code = 204
+        if isinstance(keys, MutableSequence):
+            result_list = list()
+            for item in keys:
+                try:
+                    del self._STORE[item]
+                except KeyError:
+                    result_list.append({item: 'Item not found'})
+                else:
+                    result_list.append({item: 'Item has been deleted'})
+            return result_list, status_code
         else:
-            return 204  # No Content (success)
+            try:
+                del self._STORE[keys]
+            except KeyError:
+                status_code = 404  # not found
+            else:
+                status_code = 204  # No Content (success)
+            return [], status_code
 
     def clear(self):
         self._STORE.clear()
