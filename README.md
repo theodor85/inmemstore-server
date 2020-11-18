@@ -1,6 +1,7 @@
 ## In-memory key-value хранилище (сервер)
 
 Хранит в оперативной памяти пары ключ-значение.
+Клиент здесь: https://github.com/theodor85/inmemstore-client
 
 ## Установка
 
