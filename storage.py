@@ -1,9 +1,9 @@
-from typing import Union, Any, MutableSequence
+from typing import Union, Any, MutableSequence, List, Tuple, Dict
 
 
 class Storage:
 
-    _STORE = dict()
+    _STORE: Dict[Any, Any] = dict()
 
     def bulk_update(self, input_dict: dict):
         self._STORE.update(input_dict)
@@ -23,7 +23,7 @@ class Storage:
             status_code = 200  # OK
         return value, status_code
 
-    def delete(self, keys: Union[Any, MutableSequence]) -> Union[list, int]:
+    def delete(self, keys: Union[Any, MutableSequence]) -> Tuple[List, int]:
         status_code = 204
         if isinstance(keys, MutableSequence):
             result_list = list()
